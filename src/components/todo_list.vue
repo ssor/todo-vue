@@ -2,8 +2,7 @@
   <div>
     <input-text placeholder="Add a Todo" v-model="newTodoText" @keydown.enter="addTodo" />
     <ul v-if="items.length > 0">
-      <todo-list-item v-for="item in items" :key="item.id" :todo="item"></todo-list-item>
-      <!-- <li v-for="item in items" v-bind:key="item.id">{{ item.text }}</li> -->
+      <todo-list-item v-for="item in items" :key="item.id" :todo="item" @remove="removeItem"></todo-list-item>
     </ul>
   </div>
 </template>
@@ -42,6 +41,12 @@ export default {
       } else {
         window.console.log("no content for todo");
       }
+    },
+    removeItem(id) {
+      window.console.log("remove todo item: ", id);
+      this.items = this.items.filter(item => {
+        return item.id !== id;
+      });
     }
   }
 };

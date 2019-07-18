@@ -1,5 +1,8 @@
 <template>
-  <li>{{ todo.text }}</li>
+  <li>
+    {{ todo.text }}
+    <button @click="removeItem( todo.id )">X</button>
+  </li>
 </template>
 <script>
 export default {
@@ -8,6 +11,12 @@ export default {
     todo: {
       type: Object,
       required: true
+    }
+  },
+  methods: {
+    removeItem(id) {
+      this.$emit("remove", id);
+      window.console.log("item trigger remove id ", id);
     }
   }
 };
